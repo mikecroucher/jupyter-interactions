@@ -10,5 +10,7 @@ install:
     - pip install nbval
     - pip install matplotlib
     - pip install graphviz
+    - pip install sympy
+    - pip install sklearn
 script: 
     - py.test --nbval-lax *.ipynb
