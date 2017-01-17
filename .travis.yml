@@ -12,5 +12,6 @@ install:
     - pip install graphviz
     - pip install sympy
     - pip install sklearn
+    - pip install scipy
 script: 
     - py.test --nbval-lax *.ipynb
