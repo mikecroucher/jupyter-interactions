@@ -17,3 +17,5 @@ script:
     - py.test --nbval-lax *.ipynb
     - git clone https://github.com/christianp/jupyter-interactions-site
     - cp jupyter-interactions-site/config.yml.dist jupyter-interactions-site/config.yml
+    - sed -i s#http://localhost:8888/notebooks/jupyter-interactions/#https://github.com/mikecroucher/jupyter-interactions/blob/master/# jupyter-interactions-site/config.yml
+
