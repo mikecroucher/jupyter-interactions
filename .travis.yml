@@ -16,6 +16,7 @@ install:
     - pip install sklearn
     - pip install scipy
     - pip install seaborn
+    - pip install ghp-import
 script:
     - py.test --nbval-lax *.ipynb
     - git clone https://github.com/christianp/jupyter-interactions-site
@@ -28,6 +29,6 @@ script:
     - chmod u=rw,og= ~/.ssh/publish-key
     - echo "Host github.com" >> ~/.ssh/config
     - echo "  IdentityFile ~/.ssh/publish-key" >> ~/.ssh/config
-    - git remote set-url https://github.com/mikecroucher/jupyter-interactions
-    - git fetch origin -f gh-pages:gh-pages
-
+    - git clone https://github.com/mikecroucher/jupyter-interactions -b gh-pages
+    - cd gh-pages
+    - ghp-import -n -p -m "Update gh-pages." ./../site
