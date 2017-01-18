@@ -30,5 +30,5 @@ script:
     - echo "Host github.com" >> ~/.ssh/config
     - echo "  IdentityFile ~/.ssh/publish-key" >> ~/.ssh/config
     - git clone https://github.com/mikecroucher/jupyter-interactions -b gh-pages
-    - cd gh-pages
+    - cd jupyter-interactions
     - ghp-import -n -p -m "Update gh-pages." ./../site
