@@ -6,14 +6,15 @@ addons:
     packages:
       - graphviz
 install:
-    - pip install jupyter 
+    - pip install jupyter
     - pip install nbval
     - pip install matplotlib
     - pip install graphviz
     - pip install sympy
     - pip install sklearn
     - pip install scipy
-script: 
+    - pip install seaborn
+script:
     - py.test --nbval-lax *.ipynb
     - git clone https://github.com/christianp/jupyter-interactions-site
     - cp jupyter-interactions-site/config.yml.dist jupyter-interactions-site/config.yml
