@@ -7,16 +7,11 @@ addons:
       - graphviz
 before_install:
     - openssl aes-256-cbc -K $encrypted_8e28d6063879_key -iv $encrypted_8e28d6063879_iv -in sage_interactions.enc -out ~/.ssh/publish-key -d
+    - python helpers/gen_req_txt_from_notebooks.py --nbs_dir=. --req_txt_fname=helpers/requirements.txt
 install:
-    - pip install jupyter
     - pip install nbval
-    - pip install matplotlib
-    - pip install graphviz
-    - pip install sympy
-    - pip install sklearn
-    - pip install scipy
-    - pip install seaborn
     - pip install ghp-import
+    - pip install -r helpers/requirements.txt
 script:
     - py.test --nbval-lax *.ipynb
     - git clone https://github.com/christianp/jupyter-interactions-site
