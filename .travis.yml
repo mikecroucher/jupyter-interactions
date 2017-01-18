@@ -1,0 +1,17 @@
+language: python
+python:
+    - "3.5"
+addons:
+  apt:
+    packages:
+      - graphviz
+install:
+    - pip install jupyter 
+    - pip install nbval
+    - pip install matplotlib
+    - pip install graphviz
+    - pip install sympy
+    - pip install sklearn
+    - pip install scipy
+script: 
+    - py.test --nbval-lax *.ipynb
