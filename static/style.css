@@ -9,3 +9,6 @@
 #item-gallery.searching .item:not(.search-hit) {
     display: none;
 }
+.item .card-title p {
+    margin: 0;
+}
