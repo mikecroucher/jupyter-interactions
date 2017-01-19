@@ -2,6 +2,7 @@ import ast
 import operator as op
 from functools import reduce
 import nbformat
+import IPython
 import os
 import glob
 
@@ -14,21 +15,18 @@ def pkg_name_from_mod_name(mod_name):
     return mod_name.split('.')[0]
 
 
-def remove_ipy_magic_lines(code_cell_str):
-    """Remove IPython 'magic' lines from a Python code snipped."""
-    return os.linesep.join([s for s in code_cell_str.splitlines()
-                            if s.strip() and s.strip()[0] != '%'])
-
-
 def get_refd_pkgs(s):
-    """Extract the set of packages referenced by the Python imports in a string ofo Python code.
+    """Extract the set of packages referenced by the Python imports in a string
+    of Python code.
 
-    Does this by creating an Abstract Syntax Tree (AST) rather than by text search.
+    Does this by creating an Abstract Syntax Tree (AST) rather than by text
+    search.
 
     Returns a set of package names.
     """
-    tree = ast.parse(remove_ipy_magic_lines(s))
     pkgs = set()
+
+    tree = ast.parse(s)
     for node in tree.body:
         if isinstance(node, ast.ImportFrom):
             pkgs.add(pkg_name_from_mod_name(node.module))
@@ -43,11 +41,18 @@ def get_pkgs_used_in_notebook(nb_path):
     Returns a set of package names.
     """
     nb = nbformat.read(nb_path, as_version=_use_nb_vers)
+
     assert nb['metadata']['language_info']['name'] == 'python'
+
+    # Use an IPythonInputSplitter to transform IPython code
+    # (complete with line and cell magics) to pure Python
+    s = IPython.core.inputsplitter.IPythonInputSplitter()
+
+    # Combine the sets of packages identified per cell by
+    # finding the set union (using op.__or__) of those sets
     return reduce(op.__or__,
-                  (get_refd_pkgs(c.source)
-                   for c in nb['cells']
-                   if c['cell_type'] == 'code'))
+                  (get_refd_pkgs(s.transform_cell(c.source))
+                   for c in nb['cells'] if c['cell_type'] == 'code'))
 
 
 def gen_req_txt_for_notebooks(nbs_dir='.', req_txt_fname='requirements.txt'):
@@ -67,21 +72,19 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--nbs_dir", type=str, default='.',
-                        help="Path to directory containing Jupyter (Python) Notebooks")
-    parser.add_argument("-o", "--req_txt_fname", type=str, default='requirements.txt',
-                        help="Path to directory containing Jupyter (Python) Notebooks")
-    gen_req_txt_for_notebooks(nbs_dir=parser.nbs_dir, req_txt_fname=parser.req_txt_fname)
+        help="Path to directory containing Jupyter (Python) Notebooks")
+    parser.add_argument("-o", "--req_txt_fname", type=str,
+                        default='requirements.txt',
+        help="Path to directory containing Jupyter (Python) Notebooks")
+    args = parser.parse_args()
+    gen_req_txt_for_notebooks(nbs_dir=args.nbs_dir,
+                              req_txt_fname=args.req_txt_fname)
 
 
-### TESTING ###
+# TESTING
 
 def test_get_pkg_name_from_mod_name():
     assert pkg_name_from_mod_name('matplotlib.pyplot') == 'matplotlib'
-
-
-def test_remove_ipy_magic_lines():
-    code_cell_str = "%matplotlib\na=3\nb=3\nc=5"
-    assert remove_ipy_magic_lines(code_cell_str) == 'a=3\nb=3\nc=5'
 
 
 def test_get_refd_pkgs():
