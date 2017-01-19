@@ -40,8 +40,11 @@ def get_pkgs_used_in_notebook(nb_path):
 
     Returns a set of package names.
     """
+    # Parse the structure of a Notebook file
     nb = nbformat.read(nb_path, as_version=_use_nb_vers)
 
+    # Crudely check that the default language of the Notebook
+    # is Python
     assert nb['metadata']['language_info']['name'] == 'python'
 
     # Use an IPythonInputSplitter to transform IPython code
@@ -57,12 +60,19 @@ def get_pkgs_used_in_notebook(nb_path):
 
 def gen_req_txt_for_notebooks(nbs_dir='.', req_txt_fname='requirements.txt'):
     """Generate a pip requirements file for all Notebooks in a directory."""
-    nb_fnames = glob.glob(os.path.join(nbs_dir, r'*ipynb'))
-    pkgs = set()
-    for nb_fname in nb_fnames:
-        with open(nb_fname, 'r') as f:
-            pkgs |= get_pkgs_used_in_notebook(nb_fname)
+    # Get the file paths for all Notebooks in the source directory
+    nb_fnames = glob.glob(os.path.join(nbs_dir, '*ipynb'))
+
+    # Get the set of packages referenced in each Notebook then
+    # find the set union of all of these (NB set union is handled using
+    # the binary 'or' operator ('|' or '__or__'))
+    pkgs = reduce(op.__or__,
+                  (get_pkgs_used_in_notebook(fn) for fn in nb_fnames))
+    # Convert the result to a string containing a sorted list of package
+    # names with one package per line (the standard for pip requirements.txt)
     req_txt = os.linesep.join(sorted(pkgs))
+
+    # Write this string to the named file
     with open(req_txt_fname, 'w') as f:
         f.write(req_txt)
 
@@ -77,6 +87,7 @@ if __name__ == '__main__':
                         default='requirements.txt',
         help="Path to directory containing Jupyter (Python) Notebooks")
     args = parser.parse_args()
+
     gen_req_txt_for_notebooks(nbs_dir=args.nbs_dir,
                               req_txt_fname=args.req_txt_fname)
 
