@@ -12,6 +12,7 @@ before_install:
 install:
     - pip install nbval
     - pip install ghp-import
+    - pip install IPython
     - pip install -r helpers/requirements.txt
 script:
     - py.test --nbval-lax *.ipynb
