@@ -12,3 +12,6 @@
 .item .card-title p {
     margin: 0;
 }
+body > footer {
+    margin-top: 5rem;
+}
