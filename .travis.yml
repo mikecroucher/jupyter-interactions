@@ -20,9 +20,9 @@ script:
     - git clone https://github.com/christianp/jupyter-interactions-site
     - cp jupyter-interactions-site/config.yml.dist jupyter-interactions-site/config.yml
     - sed -i s#http://localhost:8888/notebooks/jupyter-interactions/#https://github.com/mikecroucher/jupyter-interactions/blob/master/# jupyter-interactions-site/config.yml
+    - sed -i s#notebook_path: jupyter-interactions#notebook_path: ..# jupyter-interactions-site/config.yml
     - pip install -r jupyter-interactions-site/requirements.txt
     - cd jupyter-interactions-site
-    - git submodule init
     - python build_site.py
     - chmod u=rw,og= ~/.ssh/publish-key
     - echo "Host github.com" >> ~/.ssh/config
