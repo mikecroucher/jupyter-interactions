@@ -22,6 +22,7 @@ script:
     - sed -i s#notebook_path: ../jupyter-interactions#notebook_path: ../# jupyter-interactions-site/config.yml
     - pip install -r jupyter-interactions-site/requirements.txt
     - cd jupyter-interactions-site
+    - git submodule init
     - python build_site.py
     - chmod u=rw,og= ~/.ssh/publish-key
     - echo "Host github.com" >> ~/.ssh/config
