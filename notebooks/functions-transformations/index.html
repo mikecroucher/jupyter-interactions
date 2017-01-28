@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Jupyter Interactions</title>
+
+        <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="static/icons/style.css"/>
+        <link rel="stylesheet" href="static/style.css"/>
+
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+              displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+              processEscapes: true
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] }
+          });
+        </script>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded" id="page-header">
+            <header role="header">
+                <h1 class="navbar-brand"><a href="">Jupyter Interactions</a></h1>
+            </header>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav" role="navigation">
+                    <li class="nav-item">
+                        <!-- this should go to a "how to submit a notebook" page -->
+                        <a class="nav-link" href="https://github.com/mikecroucher/jupyter-interactions/blob/master/Readme.md" title="Add a notebook to the gallery">
+                            <svg class="icon icon-plus"><use xlink:href="/static/icons/symbol-defs.svg#icon-plus"></use></svg>
+                            <span class="sr-only">Add a notebook to the gallery</span>
+                        </a> 
+                    </li>
+                    <li class="nav-item">
+                        <!-- this should go to a "how to submit a notebook" page -->
+                        <a class="nav-link" href="about">About</a> 
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mikecroucher/jupyter-interactions"><svg class="icon icon-github"><use xlink:href="/static/icons/symbol-defs.svg#icon-github"></use></svg> GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main">
+            
+<div class="container item-page">
+    <section class="intro">
+        <h2 class="display-2 mb-4">
+            Functions Transformations
+        </h2>
+        <h3>
+            
+                <small class="author"><svg class="icon icon-user"><use xlink:href="/static/icons/symbol-defs.svg#icon-user"></use></svg>Raniere Silva</small>
+            
+        </h3>
+
+        
+        <div class="item-image my-2 text-center">
+            <a title="Open the Functions Transformations notebook" target="_blank" href="https://github.com/mikecroucher/jupyter-interactions/blob/master/functions-transformations.ipynb"><img src="data:image/png;base64,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
+gg==
+"></a>
+        </div>
+        
+
+        <div class="text-center m-2">
+            <a class="btn btn-primary btn-lg" href="https://github.com/mikecroucher/jupyter-interactions/blob/master/functions-transformations.ipynb" target="_blank"><svg class="icon icon-play3"><use xlink:href="/static/icons/symbol-defs.svg#icon-play3"></use></svg> Run this notebook now</a>
+        </div>
+    </section>
+
+    <section class="row">
+        <div class="col-12 col-md-8">
+            <div class="description">
+                <p>Move the sliders and see how the function change. You can select other functions.</p>
+
+            </div>
+
+            
+            <div class="references">
+                <h3><svg class="icon icon-book"><use xlink:href="/static/icons/symbol-defs.svg#icon-book"></use></svg> References</h3>
+                <ul>
+                    
+                    <li><p><a href="https://en.wikipedia.org/wiki/Linear_function">Linear function. Wikipedia.</a></p>
+</li>
+                    
+                    <li><p><a href="https://en.wikipedia.org/wiki/Absolute_value">Absolute value. Wikipedia.</a></p>
+</li>
+                    
+                    <li><p><a href="https://en.wikipedia.org/wiki/Quadratic_function">Quadratic function. Wikipedia.</a></p>
+</li>
+                    
+                    <li><p><a href="https://en.wikipedia.org/wiki/Cubic_function">Cubic function. Wikipedia.</a></p>
+</li>
+                    
+                </ul>
+            </div>
+            
+        </div>
+        <div class="col-12 col-md-4">
+            
+            <div class="keywords card mb-2">
+                <div class="card-block">
+                    <h4 class="card-title"><svg class="icon icon-book"><use xlink:href="/static/icons/symbol-defs.svg#icon-book"></use></svg> Keywords</h4>
+                    <ul >
+                        
+                        <li>Functions</li>
+                        
+                        <li>Linear function</li>
+                        
+                        <li>Absolute function</li>
+                        
+                        <li>Quadratic function</li>
+                        
+                        <li>Cubic function</li>
+                        
+                    </ul>
+                </div>
+            </div>
+            
+            
+            <div class="requirements card mb-2">
+                <div class="card-block">
+                    <h4 class="card-title"><svg class="icon icon-hammer"><use xlink:href="/static/icons/symbol-defs.svg#icon-hammer"></use></svg> Packages used</h4>
+                    <ul >
+                        
+                        <li><a href="https://pypi.python.org/pypi/numpy">numpy</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+</div>
+
+        </main>
+
+        <footer role="contentinfo" class="text-muted">
+            <div class="container">
+                <p>Notebooks &copy; their authors, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a></p>
+            </div>
+        </footer>
+
+        
+        
+    </body>
+</html>
