@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 openssl aes-256-cbc -K $encrypted_8e28d6063879_key -iv $encrypted_8e28d6063879_iv -in sage_interactions.enc -out ~/.ssh/publish-key -d
 git clone https://github.com/christianp/jupyter-interactions-site
 pip install -r jupyter-interactions-site/requirements.txt
