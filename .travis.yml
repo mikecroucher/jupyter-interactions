@@ -17,4 +17,4 @@ script:
    # If this is a PR, just test the notebooks
    - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./test_all_notebooks.sh; fi
    # If it's not a PR, test all notebooks and then build the website
-   - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./test_all_notebooks.sh;bash ./build_website; fi
+   - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./test_all_notebooks.sh;bash ./build_website.sh; fi
